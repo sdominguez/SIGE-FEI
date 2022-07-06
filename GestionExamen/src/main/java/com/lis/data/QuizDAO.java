@@ -8,6 +8,7 @@ import com.lis.beans.Quiz;
 import com.lis.connection.MySQLConnection;
 import com.lis.dao.IQuizDAO;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -38,17 +39,17 @@ public class QuizDAO implements IQuizDAO{
             
             String insertQuery = "INSERT INTO quiz (name, description, open_date, close_date, "
                     + "time_minutes, type_quiz_id, status_id, course_clave, professor) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + "VALUES (?, ?, '"+quiz.getOpen_date().toString()+"', '"
+                    +quiz.getClose_date().toString()+"', ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(insertQuery);
             // enviar el commando insert
             ps.setString(1, quiz.getName());
             ps.setString(2, quiz.getDescription());
-            ps.setString(3, quiz.getOpen_date().toString());
-            ps.setString(4, quiz.getClose_date().toString());
-            ps.setInt(5, quiz.getTime_minutes());
-            ps.setInt(6, quiz.getStatus_id());
-            ps.setString(7, quiz.getCourse_clave());
-            ps.setString(8, quiz.getProfessor());
+            ps.setInt(3, quiz.getTime_minutes());
+            ps.setInt(4, quiz.getType_quiz_id());
+            ps.setInt(5, quiz.getStatus_id());
+            ps.setString(6, quiz.getCourse_clave());
+            ps.setString(7, quiz.getProfessor());
             ps.executeUpdate();
             conn.close();
         } catch (ClassNotFoundException ex) {

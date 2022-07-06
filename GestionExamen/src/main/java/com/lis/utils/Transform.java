@@ -21,7 +21,7 @@ public class Transform {
         String[] strTime = dt[1].split(":");
         
         LocalDate date = LocalDate.of(Integer.valueOf(strDate[0]), Integer.valueOf(strDate[1]), Integer.valueOf(strDate[2]));
-        LocalTime time = LocalTime.of(Integer.valueOf(strTime[0]), Integer.valueOf(strTime[1]), Integer.valueOf(strTime[2]));
+        LocalTime time = LocalTime.of(Integer.valueOf(strTime[0]), Integer.valueOf(strTime[1]));
         
         return LocalDateTime.of(date, time);
     }
