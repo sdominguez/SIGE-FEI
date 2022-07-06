@@ -35,11 +35,20 @@ public class QuizDAO implements IQuizDAO{
         try {
             // abrir la conexion
             conn = mysqlConn.getConnection();
-            String insertQuery = "INSERT INTO "+TABLE_NAME+" (name)"
-                    + "VALUES(?)";
+            
+            String insertQuery = "INSERT INTO quiz (name, description, open_date, close_date, "
+                    + "time_minutes, type_quiz_id, status_id, course_clave, professor) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(insertQuery);
             // enviar el commando insert
-            ps.setString(1, actor.getName());
+            ps.setString(1, quiz.getName());
+            ps.setString(2, quiz.getDescription());
+            ps.setString(3, quiz.getOpen_date().toString());
+            ps.setString(4, quiz.getClose_date().toString());
+            ps.setInt(5, quiz.getTime_minutes());
+            ps.setInt(6, quiz.getStatus_id());
+            ps.setString(7, quiz.getCourse_clave());
+            ps.setString(8, quiz.getProfessor());
             ps.executeUpdate();
             conn.close();
         } catch (ClassNotFoundException ex) {
